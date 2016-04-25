@@ -1,4 +1,4 @@
-doc = bmvc_review # root 
+doc = bmvc_dl_seasonal # root 
 pdfs=$(doc:%=%.pdf)
 dvis=$(doc:%=%.dvi)
 
