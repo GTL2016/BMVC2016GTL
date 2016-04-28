@@ -1,2 +1,18 @@
 \section{Dataset and Experimental Setup}
+Dataset:
+- Environmental images from 2013 to 2015
+- Seasonal changes
+- Lighting changes
+- Video frames from camera XXXXX
 
+Classification:
+
+
+
+
+Regression:
+- Gaussian initialization of weights had to be tuned so that the convolution layers pass information to the fully connected layers (variances and biases)
+- Learning rate adaptation depending of the nature of the layer (fc or conv).
+- Weight decay
+- Tests after loading the weights from the classification
+- Influence of the dropout layer
