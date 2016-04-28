@@ -1,0 +1,10 @@
+\subsection{Classification}
+Labels chosen to divide the dataset in 1-meter intervals around the lake, along with heading separated in 10 degrees increments. Goal : obtain classes of images representing the same area with the same angle, to facilitate classification.
+
+At training : class selection and reindexing. All classes must have at least 50\% of the highest class image count. This way, all classes are represented enough times for the network to learn their features. This represents around 1k images per class, for around 300 classes.
+
+Fine tuning was made on number of images (more is better), size of minibatches (more is faster, less is more precise) and learning rate (decrease more times, but less each time). Other parameters remained as is.
+
+The aim was not necessarily to obtain a great classification, but to create good features for each class, independently of seasonal changes. We want good convolutional layers.
+
+Implementation made on Caffe, which is a good framework for classification tasks. No changes on the network structure, but trained from scratch. Unlike regression, Caffe was adapted to the task.
