@@ -1,13 +1,19 @@
 \subsection{Regression}
 The objective of the regression task is to perform localization with performance comparable to GPS system.
+
 The parameters of the training had to be tuned for the Network to perform at its best for the regression task.
+
 The layer of the network are initialized using normal distributions. The initialization variances had to be changed so that the weights are big enough to propagate information through the Network while still ensuring convergence.
 The initial learning rate and its evolution policy heavily depends on the loss used. For the regression task the initial learning rate was limited by the initial loss.
+
 Based on those general settings, we tested three different approaches. The first one consists in testing those parameters uniformly among the network. The second one consists in fine-tuning the learning rate of each layer differently. The third one consists in loading the weights of the convolution layers from the classification training.
+
 The first approach allowed to achieve an average error of about 20 meters per label. However after the training, the convolution layers filters did not exhibit any specific features. Thus, it appears that the regression was only supported by the fully connected layers. In our case where the goal is to build a seasonal invariant representation of natural scenes this approach did not reach our expectations.
 -RESULTS
+
 The second approach led us to consider the difference of behavior of the fully-connected layers regarding the sensitivity to learning rate. By decreasing the learning rate of those layers, we forced the convolution layers to take part in the regression. This method resulted in being more successful than the previous one. The best average error we achieved is -RESULTS-. Some natural environment features can be retrieved in the convolution filters.
 -IMAGE-
+
 The last approach was used on the first approach configuration. It was observed that the convolution weights decreased during the training and lasted with the same order of distribution than with the previous approaches. However the convolution filters retrieved exhibited different structure than the previous approach.
 
 Tests results to include :
