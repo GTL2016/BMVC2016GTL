@@ -8,6 +8,7 @@ Fine tuning was made on number of images (more is better), size of minibatches (
 The aim was not necessarily to obtain a great classification, but to create good features for each class, independently of seasonal changes. We want good convolutional layers.
 
 Implementation made on Caffe, which is a good framework for classification tasks. No changes on the network structure, but trained from scratch. Unlike regression, Caffe was adapted to the task.
+--> Include description of the Network (image ?)
 
 \subsubsection{Prototypes}
 Representations of an image will be found in the network's convolutional layers. As such, we averaged filter responses for every layer over all images in a class. We can thus minimize the impact of variance over the class images (slight heading and position variations).

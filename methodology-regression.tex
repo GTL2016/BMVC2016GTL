@@ -1,20 +1,6 @@
 \subsection{Regression}
-Labels:
-- We need the label to include the information on the position and angle of the view
-- 4 dimensions labels (coordinates of the robot + coordinates of the point we are looking at on the shore)
-- Normalization issues: The solution was to recenter and rescale the labels in [0,1].
-- Datasets creations: Same as for the classification we built our datasets with images from the most highly represented classes. By taking a given number of images from each highly represented class we make sure that no class is overly represented so that we do not induce bias.
+The goal of the regression task is to compute the GPS position corresponding to an image of a given place. This image is completely described by the position of the camera and its orientation. Directly using the position and orientation of the camera as labels would have resulted in inhomogeneous labels. Consequently, it was chosen to use a 4-dimension vector. Two dimensions represent the position of the camera and the other two represent the position of the side of the lake seen in the image. To ensure convergence the labels were normalized and re-centered.
 
-Loss:
-- Euclidean loss, made possible because our labels were homogeneous
+For comparison matters the same Network CaffeNet was used for the regression task. Yet some changes were made on the loss layer which previously used the SoftMax function. It was chosen to use the euclidean loss function in this case where the labels are distances. The creation of the dataset is similar to the one performed for the classification.
 
-Network structure: 
-- CaffeNet (a replication of the model described in the AlexNet publication) that performs well for classification tasks (on the ImageNet dataset).
-- Accuracy layer is irrelevant on a regression problem so we removed it (the loss is our accuracy indicator)
-- We changed the loss layer to the euclidean loss layer
-
-Implementation:
-- Framework Caffe: easy to use for the usual cases, python wrapper
-- Not directly adapted for our problem: float labels, multilabel regression
-- Can work with some tricks
-- We would not recommend Caffe for similar problems
+The implementation was done with Caffe after some modification so it could deal with real value labels and multi-label regression.
