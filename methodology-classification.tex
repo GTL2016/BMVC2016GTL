@@ -1,29 +1,14 @@
 \subsection{Classification}
-%Labels chosen to divide the dataset in 1-meter intervals around the lake, along with heading separated in 10 degrees %increments. Goal : obtain classes of images representing the same area with the same angle, to facilitate %classification.
 
-One of the major challenge of classification is to properly define the classes. We choose to discretize the position into 2,5-meters square. Since the heading is not constant during navigation, we also included it with 10 degrees increments. The objective is to ensure that the images are consistent within each class to limit unnecessary noise during training. 
+One of the major challenge of classification is to properly define classes. We choose to discretize the position into 2,5-meters square. Since the heading is not constant during navigation and can vary a lot without positional change, we also included the orientation of the camera with 10 degrees increments. The objective is to ensure that the images are consistent within each class to limit unnecessary noise during training. 
 
+This representation of the possible position of the robot is very sparse so to improve the efficency of the training, we will limit the number of classes studied. We also need to avoid having a class too strong against the other during the training, our choice is to keep only the classes that have a number of images of at least 50\% of the highest class image count. For our database, this represents around 1000 images per class with 295 classes giving us 300 000 images in total.
 
-%At training : class selection and re-indexing. All classes must have at least 50\% of the highest class image count. %This way, all classes are represented enough times for the network to learn their features. This represents around 1k %images per class, for around 300 classes.
-
-For the training we need to avoid having a class too strong against the other so we choose only classes that have a number of images of at least 50\% of the highest class image count. For our database, this represents around 1000 images per class with 295 classes.
-
-We train an implementation of AlexNet on Caffe. We chose Caffe over other deep learning framework because it was easy to use especially for a classification task. We didn't change the network structure but since we train it from scratch we tuned the number of images used, the size of the mini-batches and the learning rate. We had to find a trade-off between learning time and precision.
+We train an implementation of AlexNet on Caffe. We chose Caffe over other deep learning framework because it was easy to use especially for a classification task. AlexNet is a recognized network used for classification. We didn't change the network structure but since we train it from scratch we tuned the number of images used, the size of the mini-batches and the learning rate. We had to find a trade-off between learning time and precision. We used smaller dataset to test the training and to tune those parameters.
 
 --> Include description of the Network (image ?)
 
-The aim was not to obtain a great classification, but to create good features for each class. This means that we are aiming at obtaining good convolutional layers that will be independent of seasonal changes.
-
-
-%Implementation made on Caffe, which is a good framework for classification tasks. No changes on the network structure, %but trained from scratch. Unlike regression, Caffe was adapted to the task.
-%--> Include description of the Network (image ?)
-
-
-%Fine tuning was made on number of images (more is better), size of mini-batches (more is faster, less is more precise) %and learning rate (decrease more times, but less each time). Other parameters remained as is.
-
-%The aim was not necessarily to obtain a great classification, but to create good features for each class, independently %of seasonal changes. We want good convolutional layers.
-
-
+The aim was not to obtain a great classification, but to create good features for each class. This means that we are aiming at obtaining convolutional layers that are well formed and rich enough to give a good representation of the image while staying independent of seasonal and local changes.
 
 \subsubsection{Prototypes}
-Representations of an image will be found in the network's convolutional layers. As such, we averaged filter responses for every layer over all images in a class. We can thus minimize the impact of variance over the class images (slight heading and position variations).
+Representations of an image will be found in the network's convolutional layers. As such, we averaged filter responses for every layer over all images in a class. We can thus minimize the impact of variance over the class images (slight heading and position variations). The average of the filter response for one layer of one image gives us a good representation of this image. It can be compared to the prototype of any classes giving us a metric for the similarity of an image to a given class. 
