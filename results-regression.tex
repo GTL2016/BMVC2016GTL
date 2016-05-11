@@ -2,7 +2,7 @@
 The objective of the regression task is to perform localization with performance comparable to GPS system. The parameters of the training had to be tuned for the Network to perform at its best for the regression task.
 
 The layer of the network are initialized using normal distributions. The initialization variances had to be changed so that the weights are big enough to propagate information through the Network while still ensuring convergence.
-The initial learning rate and its evolution policy heavily depends on the loss used. For the regression task the initial learning rate was limited by the initial loss.
+The initial learning rate and its evolution policy heavily depends on the loss which is used. For the regression task, very high values and a diverging behaviour were observed with the Euclidean loss at the beginning of the training. The initial learning rate had to be decreased to avoid these effects.
 
 Based on those general settings, we tested three different approaches. The first one consists in testing those parameters uniformly among the network. The second one consists in fine-tuning the learning rate of each layer differently. The third one consists in loading the weights of the convolution layers from the classification training. In order to compare our results with those three approaches, we refer to the following loss function :
 
@@ -46,7 +46,7 @@ The last approach was used on the first approach configuration. It was observed 
 \label{3appfilter}
 \end{figure}
 
-The best results in term of generalization and precision of the prediction were achieved with the second approach. After 148000 iterations, the prediction errors are centered Gaussian-like distributions with a standard deviation of 12.4 meters on X and 20.6 meters on Y. Considering that performing this operation with the human brain is found to be challenging for image from a natural environment, the resulting precision is very acceptable. The labels were displayed to be compared to the predicted positions (fig.~\ref{map}.a).
+The best results in term of generalization and precision of the prediction were achieved with the second approach. After 148000 iterations, the prediction errors are centered Gaussian-like distributions with a standard deviation of 12.4 meters on X and 20.6 meters on Y. Considering that performing this operation with the human brain is found to be challenging for image from a natural environment, the resulting precision is very acceptable. The labels were displayed to be compared to the predicted positions (fig.~\ref{map}.a). The red and green dots represent the original labels and the blue and purple dots represent the predicted labels.
 
 \begin{figure}[htb]
 \centering
