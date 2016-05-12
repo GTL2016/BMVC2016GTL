@@ -1,5 +1,5 @@
 \subsection{Classification}
-Our best training on the aforementioned dataset was made with 300 000 iterations over minibatches of size 32, with a learning rate decresaing 10 times throughout training. The full training took 5 days to finish on a Tesla K20C machine, and attained 70\% accuracy on network predictions, on a top-1 classification basis. Such results are satisfactory considering the resemblance of natural scene images. It should be noted that classification was not the main goal, but a good classification will intuitively lead to better class representations.
+Our best training on the aforementioned dataset was made with 300 000 iterations over minibatches of size 32 (down from the default 256 for better accuracy), with a learning rate decreasing at a fixed rate ten times during the course of training. The full training took 5 days to finish on a Tesla K20C machine, and attained 70\% accuracy on the test set, on a top-1 classification basis. Such results are satisfactory considering the resemblance of natural scene images. It should be noted that classification was not the main goal, but a good classification will intuitively lead to better class representations.
 
 We can thus extract the trained filters responses to see images as processed by the network. The conv1 layer will mostly learn edges, namely the skyline and the waterline. Conv2 detects foliage, and convolutional layers 3 through 5 contain low-level features that are harder to interpret properly. We tested prototype generation on all convolutional layers, as well as the last pooling layer pool5, shown in fig.~\ref{prototypes}.
 
@@ -12,7 +12,7 @@ We can thus extract the trained filters responses to see images as processed by 
 \label{prototypes}
 \end{figure}
 
-We generated prototypes for all classes, and tested whether an image can be recognized only using its class prototypes. Testing over a thousand random images and measuring using a cosine distance shows that all layers perform well for classification, with distances to the wrong prototype being indubitably larger than distances to the right prototype (fig.~\ref{fulltrainvalues} and \ref{allclft})
+We generated prototypes for all classes, and tested whether an image can be recognized only using its class prototypes. Testing over a thousand random images and measuring using a cosine distance shows that all layers can be used as suitable descriptors, with distances to the wrong prototypes being indubitably larger than distances to the right prototype on average. (fig.~\ref{fulltrainvalues} and \ref{allclft})
 
 \begin{figure}[htb]
 \centering
@@ -28,7 +28,7 @@ We generated prototypes for all classes, and tested whether an image can be reco
   pool5 & 1,860143028 \\
   \hline
 \end{tabular}
-\caption{Ratio of median distance for the wrong prototype over median distance for the right prototype}
+\caption{Ratio of median distance for the wrong prototypes over median distance for the right prototype}
 \label{fulltrainvalues}
 \end{figure}
 
@@ -46,7 +46,7 @@ We generated prototypes for all classes, and tested whether an image can be reco
 \label{allclft}
 \end{figure}
 
-We also trained the same network on half the classes, to test for generalization capabilities. The results are analogous regarding known classes, but the network struggled with unseen classes (fig.~\ref{halftrainvalues}). It seems that it learns how to efficiently discriminate between its known classes, rather than truly recognizing a location.
+We also trained the same network on half the classes, to test for generalization capabilities. We wanted to test whether the network learned how to transform an image into its seasonal-invariant representation, proved to exist with the full training. The results are analogous regarding known classes, but fail on unseen classes (fig.~\ref{halftrainvalues}). It seems that the network learns how to efficiently discriminate between its known classes, rather than truly learning seasonal variations.
 
 \begin{figure}[htb]
 \centering
