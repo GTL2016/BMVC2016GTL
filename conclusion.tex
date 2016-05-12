@@ -1,1 +1,16 @@
 \section{Conclusions}
+This paper evaluated the performance of convolutional neural network on place
+recognition and pose prediction tasks for natural environment under large
+seasonal changes, in the context of a long-term autonomous monitoring problem.
+To this end, we presented an original dataset consisting in several million
+images taken at weekly interval on the shore of a small lake over two years. 
+
+Water and sky appearance inconsistency, as well as the strong seasonal changes
+of vegetation and the weather-dependent lighting conditions proved to be
+manageable both for the classification task (70\% precision) and for the pose
+regression task (20m standard deviation over 1km of shore line). However, it
+turned out that using the standard network architecture did not result in
+learning generalizable features leading to a season-invariant representation of
+the environment. Turning towards more general network architectures as
+in~\cite{radford2016} would probably be appropriate but it turned out that
+Caffe was too limited to explore this possibility within this study.
