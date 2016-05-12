@@ -7,7 +7,7 @@
         \includegraphics[width=0.3\columnwidth]{siftflow-hard/140812-18224}  \\
         Mar. 14 & June 25 & Aug. 12\\
     \end{tabular}
-    \caption{Examples of variation in appearance of a section of the lakeshore from winter to summer. The significant variation in the vegetation and lighting conditions makes place recognition particularly challenging.} 
+    \caption{Examples of variation in appearance of a section of the lake shore from winter to summer. The significant variation in the vegetation and lighting conditions makes place recognition particularly challenging.} 
     \label{fig:dataset-hard}
 \end{figure}
 
@@ -19,7 +19,7 @@ considering the weekly observation of a lake shore over multiple years using an 
 programmed to follow the shore at a constant distance while recording images.
 As such, our images depict scenes which are combinations of close-up trees, far-away trees, bushes,
 lawns, water and sky, with a high level of similarities. Because we work in a
-natural setting, this environnment is subjected to seasonal changes (trees
+natural setting, this environment is subjected to seasonal changes (trees
 blooming, leaves falling, ...), structural changes (cut branch, fallen trees,
 mowed lawns) and weather variations impacting the lighting condition, spectrum
 and incidence. Figure~\ref{fig:dataset-hard} gives an example of a relatively easy group
@@ -45,7 +45,7 @@ standard network structure can be used. In a
 second stage, we now consider a CNN trained to predict the pose (or view point)
 of the camera (2D position and heading) using an adapted network structure
 suitable for a regression task. Finally, in a third stage, we evaluate the
-quality of the internal representation learnt by the convolutional layers of
+quality of the internal representation learned by the convolutional layers of
 the CNN to describe a place independently of its seasonal appearance as well as
 the generalizability of the resulting features. This third stage is important
 for the potential of this internal representation to be used to detect changes

@@ -1,5 +1,5 @@
 \subsection{Classification}
-Our best training on the aforementioned dataset was made with 300 000 iterations over minibatches of size 32 (down from the default 256 for better accuracy), with a learning rate decreasing at a fixed rate ten times during the course of training. The full training took 5 days to finish on a Tesla K20C machine, and attained 70\% accuracy on the test set, on a top-1 classification basis. Such results are satisfactory considering the resemblance of natural scene images. It should be noted that classification was not the main goal, but a good classification will intuitively lead to better class representations.
+Our best training on the aforementioned dataset was made with 300 000 iterations over mini-batches of size 32 (down from the default 256 for better accuracy), with a learning rate decreasing at a fixed rate ten times during the course of training. The full training took 5 days to finish on a Tesla K20C machine, and attained 70\% accuracy on the test set, on a top-1 classification basis. Such results are satisfactory considering the resemblance of natural scene images. It should be noted that classification was not the main goal, but a good classification will intuitively lead to better class representations.
 
 We can thus extract the trained filters responses to see how images as processed by the network. The {\tt conv1} layer will mostly learn edges, namely the skyline and the waterline. {\tt Conv2} detects foliage, and convolutional layers 3 through 5 contain low-level features that are harder to interpret properly. We tested prototype generation on all convolutional layers, as well as the last pooling layer {\tt pool5}, shown in fig.~\ref{prototypes}.
 
@@ -20,17 +20,17 @@ We generated prototypes for all classes, and tested whether an image can be reco
 \begin{tabular}{|c|c|c||c|c|}
   \hline
   Layer & Overall Ratio & Precision (\%) & Ratio (seen)  & Ratio (unseen) \\
-  & (complete dataset) & top-20 & (1st half dataset) & (2nd half dataset) \\
+  & (complete dataset) & top-20 & ($1^{st}$ half dataset) & ($2^{nd}$ half dataset) \\
   \hline
-  conv1 & 1.76 & 43.9\% & 1.70 & 1.03 \\ 
-  conv2 & 2.99 & 42.3\% & 0.93 & 0.96 \\ 
-  conv3 & 1.86 & 34.8\% & 1.40 & 0.94 \\ 
-  conv4 & 1.79 & 08.4\% & 1.16 & 1.00 \\ 
-  conv5 & 1.68 & 57.3\% & 1.32 & 0.98 \\ 
-  pool5 & 1.86 & 52.0\% & 1.42 & 0.95 \\ 
+  {\tt conv1} & 1.76 & 43.9\% & 1.70 & 1.03 \\ 
+  {\tt conv2} & 2.99 & 42.3\% & 0.93 & 0.96 \\ 
+  {\tt conv3} & 1.86 & 34.8\% & 1.40 & 0.94 \\ 
+  {\tt conv4} & 1.79 & 08.4\% & 1.16 & 1.00 \\ 
+  {\tt conv5} & 1.68 & 57.3\% & 1.32 & 0.98 \\ 
+  {\tt pool5} & 1.86 & 52.0\% & 1.42 & 0.95 \\ 
   \hline
 \end{tabular}
-\caption{Ratio of median distance of a random image to the wrong prototypes over median distance to the correct prototype. 2nd column refers to the ratio achieved using the complete dataset for training. 3rd column give the percentage of successful top-20 classification using the distance to the prototypes of the full dataset. 4th column is similar but using only half of the classes. 5th column evaluate the generalization performance by evaluating images from the classes not used for training. }
+\caption{Ratio of median distance of a random image to the wrong prototypes over median distance to the correct prototype. $2^{nd}$ column refers to the ratio achieved using the complete dataset for training. $3^{rd}$ column give the percentage of successful top-20 classification using the distance to the prototypes of the full dataset. $4^{th}$ column is similar but using only half of the classes. $5^{th}$ column evaluate the generalization performance by evaluating images from the classes not used for training. }
 \label{fulltrainvalues}
 \end{table}
 
