@@ -12,23 +12,24 @@ We can thus extract the trained filters responses to see how images as processed
 \label{prototypes}
 \end{figure}
 
-We generated prototypes for all classes, and tested whether an image can be recognized only using its class prototypes. Testing over a thousand random images and measuring using a cosine distance shows that all layers can be used as suitable descriptors, with distances to the wrong prototypes being indubitably larger than distances to the right prototype on average (see table~\ref{fulltrainvalues} and fig.~\ref{allclft})
+We generated prototypes for all classes, and tested whether an image can be recognized only using its class prototypes. Testing over a thousand random images and measuring using a cosine distance shows that all layers can be used as suitable descriptors, with distances to the wrong prototypes being indubitably larger than distances to the right prototype on average (see table~\ref{fulltrainvalues}, column 2 and fig.~\ref{allclft})
 
 \begin{table}[htb]
 \centering
-\begin{tabular}{|c|c|}
+\begin{tabular}{|c|c||c|c|}
   \hline
-   Layer & Ratio \\
+  Layer & Overall Ratio & Ratio (seen)  & Ratio (unseen)\\
+        & (complete dataset) & (1st half dataset) & (2nd half dataset) \\
   \hline
-  conv1 & 1,76\\ % 6538663 \\
-  conv2 & 2,99\\ % 4092459 \\
-  conv3 & 1,86\\ % 6754565 \\
-  conv4 & 1,79\\ % 6977461 \\
-  conv5 & 1,68\\ % 1968205 \\
-  pool5 & 1,86\\ % 0143028 \\
+  conv1 & 1,76 & 1,70 & 1,03 \\ 
+  conv2 & 2,99 & 0,93 & 0,96 \\ 
+  conv3 & 1,86 & 1,40 & 0,94 \\ 
+  conv4 & 1,79 & 1,16 & 1,00 \\ 
+  conv5 & 1,68 & 1,32 & 0,98 \\ 
+  pool5 & 1,86 & 1,42 & 0,95 \\ 
   \hline
 \end{tabular}
-\caption{Ratio of median distance of a random image to the wrong prototypes over median distance to the correct prototype.}
+\caption{Ratio of median distance of a random image to the wrong prototypes over median distance to the correct prototype. 2nd column refers to the ratio achieved using the complete dataset for training. 3rd column is similar but using only half of the classes. 4th column evaluate the generalization performance by evaluating images from the classes not used for training.}
 \label{fulltrainvalues}
 \end{table}
 
@@ -47,22 +48,23 @@ We generated prototypes for all classes, and tested whether an image can be reco
 \end{figure}
 
 We also trained the same network on half the classes, to test for generalization capabilities. We wanted to test whether the network learned how to transform an image into its seasonal-invariant representation. %, proved to exist with the full training. % not idea what that means. CP
-In the case of the classes observed in the training set, the representation results are analogous to the full dataset. However, the internal features are not discriminative when applied on images from unseen classes (fig.~\ref{halftrainvalues}). It seems that the network learns how to efficiently discriminate between its known classes, rather than truly learning seasonal variations.
+In the case of the classes observed in the training set, the representation results are analogous to the full dataset. However, the internal features are not discriminative when applied on images from unseen classes (table~\ref{fulltrainvalues}, column 3 and 4). It seems that the network learns how to efficiently discriminate between its known classes, rather than truly learning seasonal variations.
 
-\begin{table}[htb]
-\centering
-\begin{tabular}{|c|c|c|}
-  \hline
-   Layer & Ratio (seen) & Ratio (unseen) \\
-  \hline
-  conv1 & 1,701451548 & 1,038455885 \\
-  conv2 & 0,933561816 & 0,96491628 \\
-  conv3 & 1,402536829 & 0,949963419 \\
-  conv4 & 1,162658456 & 1,004402971 \\
-  conv5 & 1,327277828 & 0,980390038 \\
-  pool5 & 1,42521592 & 0,951486052 \\
-  \hline
-\end{tabular}
-\caption{Ratio of median distances, for seen and unseen classes}
-\label{halftrainvalues}
-\end{table}
+% Merged in table above
+% \begin{table}[htb]
+% \centering
+% \begin{tabular}{|c|c|c|}
+%   \hline
+%    Layer & Ratio (seen) & Ratio (unseen) \\
+%   \hline
+%   conv1 & 1,70 & 1,03 \\
+%   conv2 & 0,93 & 0,96 \\
+%   conv3 & 1,40 & 0,94 \\
+%   conv4 & 1,16 & 1,00 \\
+%   conv5 & 1,32 & 0,98 \\
+%   pool5 & 1,42 & 0,95 \\
+%   \hline
+% \end{tabular}
+% \caption{Ratio of median distances, for seen and unseen classes}
+% \label{halftrainvalues}
+% \end{table}
