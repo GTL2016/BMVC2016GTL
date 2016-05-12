@@ -16,20 +16,20 @@ We generated prototypes for all classes, and tested whether an image can be reco
 
 \begin{table}[htb]
 \centering
-\begin{tabular}{|c|c||c|c|}
+\begin{tabular}{|c|c||c|c||c|}
   \hline
-  Layer & Overall Ratio & Ratio (seen)  & Ratio (unseen)\\
-        & (complete dataset) & (1st half dataset) & (2nd half dataset) \\
+  Layer & Overall Ratio & Ratio (seen)  & Ratio (unseen) & Classification Percentage\\
+        & (complete dataset) & (1st half dataset) & (2nd half dataset) &(complete dataset)\\
   \hline
-  conv1 & 1,76 & 1,70 & 1,03 \\ 
-  conv2 & 2,99 & 0,93 & 0,96 \\ 
-  conv3 & 1,86 & 1,40 & 0,94 \\ 
-  conv4 & 1,79 & 1,16 & 1,00 \\ 
-  conv5 & 1,68 & 1,32 & 0,98 \\ 
-  pool5 & 1,86 & 1,42 & 0,95 \\ 
+  conv1 & 1,76 & 1,70 & 1,03 & 0,439 \\ 
+  conv2 & 2,99 & 0,93 & 0,96 & 0,423 \\ 
+  conv3 & 1,86 & 1,40 & 0,94 & 0,348 \\ 
+  conv4 & 1,79 & 1,16 & 1,00 & 0,084 \\ 
+  conv5 & 1,68 & 1,32 & 0,98 & 0,573 \\ 
+  pool5 & 1,86 & 1,42 & 0,95 & 0,52  \\ 
   \hline
 \end{tabular}
-\caption{Ratio of median distance of a random image to the wrong prototypes over median distance to the correct prototype. 2nd column refers to the ratio achieved using the complete dataset for training. 3rd column is similar but using only half of the classes. 4th column evaluate the generalization performance by evaluating images from the classes not used for training.}
+\caption{Ratio of median distance of a random image to the wrong prototypes over median distance to the correct prototype. 2nd column refers to the ratio achieved using the complete dataset for training. 3rd column is similar but using only half of the classes. 4th column evaluate the generalization performance by evaluating images from the classes not used for training. 5th column give the percentage of successful top20 classification using the distance to the prototypes of the full dataset}
 \label{fulltrainvalues}
 \end{table}
 
