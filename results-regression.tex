@@ -2,7 +2,7 @@
 The objective of the regression task is to perform localization with performance comparable to GPS system. The parameters of the training had to be tuned for the Network to perform at its best for the regression task.
 
 The layer of the network are initialized using normal distributions. The initialization variances had to be changed so that the weights are big enough to propagate information through the Network while still ensuring convergence.
-The initial learning rate and its evolution policy heavily depends on the loss used. For the regression task the initial learning rate was limited by the initial loss.
+The initial learning rate and its evolution policy heavily depends on the loss which is used. For the regression task, very high values and a diverging behaviour were observed with the Euclidean loss at the beginning of the training. The initial learning rate had to be decreased to avoid these effects.
 
 Based on those general settings, we tested three different approaches. The first one consists in testing those parameters uniformly among the network. The second one consists in fine-tuning the learning rate of each layer differently. The third one consists in loading the weights of the convolution layers from the classification training. In order to compare our results with those three approaches, we refer to the following loss function :
 
@@ -22,9 +22,9 @@ The last approach was used on the first approach configuration. It was observed 
 \centering
 \begin{tabular}{ccc}
     a) First approach & b) Second approach & c) Third approach \\
-    \includegraphics[width=0.33\textwidth]{images/regression/test_loss_26_135000}&
-    \includegraphics[width=0.33\textwidth]{images/regression/test_loss_37_135000}&
-    \includegraphics[width=0.33\textwidth]{images/regression/test_loss_30_135000}\\
+    \includegraphics[width=0.3\textwidth]{images/regression/test_loss_26_135000}&
+    \includegraphics[width=0.3\textwidth]{images/regression/test_loss_37_135000}&
+    \includegraphics[width=0.3\textwidth]{images/regression/test_loss_30_135000}\\
 \end{tabular}
 \caption{Loss Function for 135 000 iterations}
 \label{1apploss}
@@ -36,9 +36,9 @@ The last approach was used on the first approach configuration. It was observed 
 \centering
 \begin{tabular}{ccc}
     a) First approach & b) Second approach & c) Third approach \\
-    \includegraphics[width=0.33\linewidth]{images/regression/conv1_26_135000}&
-    \includegraphics[width=0.33\linewidth]{images/regression/conv1_37_135000}&
-    \includegraphics[width=0.33\linewidth]{images/regression/conv1_30_135000}\\
+    \includegraphics[width=0.3\linewidth]{images/regression/conv1_26_135000}&
+    \includegraphics[width=0.3\linewidth]{images/regression/conv1_37_135000}&
+    \includegraphics[width=0.3\linewidth]{images/regression/conv1_30_135000}\\
 \end{tabular}
 \caption{Conv1 filters after 135 000 iterations}
 \label{1appfilter}
@@ -46,17 +46,26 @@ The last approach was used on the first approach configuration. It was observed 
 \label{3appfilter}
 \end{figure}
 
-The best results in term of generalization and precision of the prediction were achieved with the second approach. After 148000 iterations, the prediction errors are centered Gaussian-like distributions with a standard deviation of 12.4 meters on X and 20.6 meters on Y. Considering that performing this operation with the human brain is found to be challenging for image from a natural environment, the resulting precision is very acceptable. The labels were displayed to be compared to the predicted positions (fig.~\ref{map}.a).
+The best results in term of generalization and precision of the prediction were achieved with the second approach. After 148000 iterations, the prediction errors are centered Gaussian-like distributions with a standard deviation of 12.4 meters on X and 20.6 meters on Y. Considering that performing this operation with the human brain is found to be challenging for image from a natural environment, the resulting precision is very acceptable. The labels were displayed to be compared to the predicted positions (fig.~\ref{map}.a). The red and green dots represent the original labels and the blue and purple dots represent the predicted labels. The error between X and Y coordinates of the predicted and original labels was also plotted on fig.~\ref{errormap} and was found to be centered on the origin.
 
 \begin{figure}[htb]
 \centering
-\begin{tabular}{cc}
-    a) Map of predicted positions&
-    b) Map of original labels\\
-    \bmvaHangBox{\includegraphics[width=0.59\textwidth]{images/regression/lake_prediction}}&
-    \bmvaHangBox{\includegraphics[width=0.39\textwidth]{images/regression/lake}}\\
+\begin{tabular}{p{0.3\textwidth}cp{0.3\textwidth}}
+    a) Overhead map image with a sample boat path & ~ &
+    b) Map of original and predicted labels\\
+    \bmvaHangBox{\includegraphics[height=0.4\textwidth]{images/lac}}& &
+    \bmvaHangBox{\includegraphics[height=0.4\textwidth]{images/regression/lake_prediction}}\\
 \end{tabular}
 \caption{Map of predicted positions and original labels}
 \label{map}
 \label{lake}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\begin{tabular}{p{0.3\textwidth}cp{0.3\textwidth}}
+    \bmvaHangBox{\includegraphics[height=0.3\textwidth]{images/regression/error}}\\
+\end{tabular}
+\caption{Error between X and Y coordinates of predicted and original labels}
+\label{errormap}
 \end{figure}
