@@ -1,7 +1,7 @@
 \subsection{Classification}
 Our best training on the aforementioned dataset was made with 300 000 iterations over mini-batches of size 32 (down from the default 256 for better accuracy), with a learning rate decreasing at a fixed rate ten times during the course of training. The full training took 5 days to finish on a Tesla K20C machine, and attained 70\% accuracy on the test set, on a top-1 classification basis. Such results are satisfactory considering the similarities of natural scene images. It should be noted that classification was not the main goal, but a good classification will intuitively lead to better class representations.
 
-We can thus extract the trained filters responses to see how images as processed by the network. The {\tt conv1} layer will mostly learn edges, namely the skyline and the waterline. {\tt Conv2} detects foliage, and convolutional layers 3 through 5 contain low-level features that are harder to interpret properly. We tested prototype generation on all convolutional layers, as well as the last pooling layer {\tt pool5}, shown in fig.~\ref{prototypes}.
+We can thus extract the trained filters responses to see how images are processed by the network. The {\tt conv1} layer will mostly learn edges, namely the skyline and the waterline. {\tt Conv2} detects foliage, and convolutional layers 3 through 5 contain low-level features that are harder to interpret properly. We tested prototype generation on all convolutional layers, as well as the last pooling layer {\tt pool5}, shown in fig.~\ref{prototypes}.
 
 \begin{figure}[htb]
 \centering
